@@ -1,4 +1,5 @@
 package com.grupoginga.model;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
@@ -41,6 +42,17 @@ public class Aluno {
 
     @Enumerated(EnumType.STRING)
     private StatusAluno status = StatusAluno.ATIVO;
-}
 
-enum StatusAluno { ATIVO, INATIVO, AFASTADO }
+    // Lógica de verificação de atraso para o JSON
+    @Transient
+    public String getStatusFinanceiroSimplificado() {
+        LocalDate hoje = LocalDate.now();
+
+        // Se o dia de hoje for maior que o dia do vencimento, marca como ATRASADO
+        if (hoje.getDayOfMonth() > this.diaVencimento) {
+            return "ATRASADO";
+        }
+
+        return "EM DIA";
+    }
+}
