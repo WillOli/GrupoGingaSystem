@@ -1,4 +1,4 @@
-package model;
+package com.grupoginga.model;
 
 public enum Graduacao {
     VERDE_1_VOLTA("Verde 1 Volta"),
