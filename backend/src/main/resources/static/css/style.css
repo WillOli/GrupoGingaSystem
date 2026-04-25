@@ -1,0 +1,75 @@
+/* --- CONFIGURAÇÕES GERAIS --- */
+body {
+    transition: all 0.4s ease;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.logo-ginga {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+}
+
+/* --- TEMA CLARO (PADRÃO) --- */
+body.theme-claro {
+    background-color: #f4f7f6;
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.theme-claro .card {
+    background: #ffffff;
+}
+
+.theme-claro .titulo-sistema { color: #003399; }
+.theme-claro .btn-entrar {
+    background-color: #003399;
+    color: white;
+}
+.theme-claro .btn-entrar:hover { background-color: #002266; }
+
+/* --- TEMA AZUL (MODO ESCURO PROFISSIONAL) --- */
+body.theme-azul {
+    background-color: #001a4d;
+    background-image: radial-gradient(circle at top right, #003399, #001a4d);
+}
+
+body.theme-azul .card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.theme-azul .titulo-sistema,
+body.theme-azul .label-custom,
+body.theme-azul .footer-text {
+    color: #ffffff !important;
+}
+
+body.theme-azul .input-custom {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+}
+
+body.theme-azul .btn-entrar {
+    background-color: #ffcc00; /* Amarelo da logo para destaque no azul */
+    color: #001a4d;
+}
+
+body.theme-azul .btn-entrar:hover {
+    background-color: #e6b800;
+}
+
+body.theme-azul .btn-outline-primary {
+    color: #ffcc00;
+    border-color: #ffcc00;
+}
+
+/* Efeito de flutuação no Card */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2) !important;
+}

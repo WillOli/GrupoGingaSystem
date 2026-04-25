@@ -43,7 +43,7 @@ public class Aluno {
     @Enumerated(EnumType.STRING)
     private StatusAluno status = StatusAluno.ATIVO;
 
-    // Lógica de verificação de atraso para o JSON
+    // Lógica de verificação de atraso para o JSON'
     @Transient
     public String getStatusFinanceiroSimplificado() {
         LocalDate hoje = LocalDate.now();
