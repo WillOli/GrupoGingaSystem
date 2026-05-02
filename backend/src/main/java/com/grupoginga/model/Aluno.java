@@ -2,6 +2,9 @@ package com.grupoginga.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,6 +12,10 @@ import java.util.List;
 @Entity
 @Table(name = "alunos")
 @Data
+// 1. Intercepta o DELETE e faz um UPDATE mudando o status para INATIVO
+@SQLDelete(sql = "UPDATE alunos SET status = 'INATIVO' WHERE id = ?")
+// 2. Filtra globalmente para que o Hibernate só retorne alunos ATIVOS nas buscas normais
+@SQLRestriction("status <> 'INATIVO'")
 public class Aluno {
 
     @Id
@@ -22,7 +29,9 @@ public class Aluno {
     private String cpf;
 
     private String telefone;
+
     private LocalDate dataNascimento;
+
     private String caminhoFoto;
 
     @Enumerated(EnumType.STRING)
@@ -43,12 +52,14 @@ public class Aluno {
     @Enumerated(EnumType.STRING)
     private StatusAluno status = StatusAluno.ATIVO;
 
-    // Lógica de verificação de atraso para o JSON'
+    // Lógica de verificação de atraso para o JSON
     @Transient
     public String getStatusFinanceiroSimplificado() {
         LocalDate hoje = LocalDate.now();
 
-        // Se o dia de hoje for maior que o dia do vencimento, marca como ATRASADO
+        // TODO (Sprint 3): Melhorar essa regra. Atualmente ela marca como atrasado
+        // mesmo se a pessoa já tiver pago a mensalidade do mês atual.
+        // O ideal será verificar na lista de "mensalidades" se existe um pagamento no mês/ano vigente.
         if (hoje.getDayOfMonth() > this.diaVencimento) {
             return "ATRASADO";
         }
